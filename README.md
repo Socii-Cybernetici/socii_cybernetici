@@ -1,3 +1,9 @@
+# CAUTION! CHANGES TO MASTER WILL BE VISIBLE ON PROD! 
+
+# USE DEVELOP BRANCH FOR STAGING BEFORE MERGIN INTO MASTER!
+# https://socii-cybernetici.vercel.app will show the preview for development 
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
