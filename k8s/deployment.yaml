@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: catholic-codes-website
+  namespace: catholic-codes
+  labels:
+    app: catholic-codes-website
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: catholic-codes-website
+  template:
+    metadata:
+      labels:
+        app: catholic-codes-website
+    spec:
+      containers:
+      - name: nextjs-app
+        image: your-registry/catholic-codes-nextjs:latest  # Update with your image
+        ports:
+        - containerPort: 3000
+        env:
+        - name: NODE_ENV
+          value: "production"
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 5
