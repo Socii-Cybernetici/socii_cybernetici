@@ -1,9 +1,13 @@
 :root {
-  --background: #0a0a0a; /* Dark background */
-  --foreground: #00ff00; /* Neon green for text */
-  --accent-color: #ff00ff; /* Neon pink/magenta for accents */
-  --glitch-color-1: #00ffff; /* Cyan for glitch */
-  --glitch-color-2: #ffff00; /* Yellow for glitch */
+  --color-bg: #050505;
+  --color-primary: #800020; /* Burgundy */
+  --color-accent: #D4AF37; /* Gold */
+  --color-text: #E0E0E0;
+  --color-glitch-1: #ff0000;
+  --color-glitch-2: #00ff00;
+  
+  --font-mono: 'Share Tech Mono', monospace;
+  --font-gothic: 'UnifrakturMaguntia', cursive;
 }
 
 html,
@@ -13,9 +17,10 @@ body {
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: 'Share Tech Mono', monospace; /* Will add this font */
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  background-image: radial-gradient(circle at 50% 0%, #1a0505 0%, var(--color-bg) 70%);
+  font-family: var(--font-mono);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
