@@ -1,28 +1,25 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: catholic-codes-website
+  name: cybernetici
   namespace: catholic-codes
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    # Remove authentication for now, add back later if needed
-    # nginx.ingress.kubernetes.io/auth-url: "https://login.catholic.codes/oauth2/auth"
-    # nginx.ingress.kubernetes.io/auth-signin: "https://login.catholic.codes/oauth2/start?rd=https%3A%2F%2F$host$escaped_request_uri"
+    traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
-  ingressClassName: nginx
+  ingressClassName: traefik
   tls:
   - hosts:
-    - catholic.codes
-    secretName: catholic-codes-website-tls
+    - cybernetici.catholic.codes
+    secretName: cybernetici-tls
   rules:
-  - host: catholic.codes
+  - host: cybernetici.catholic.codes
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: catholic-codes-website
+            name: cybernetici
             port:
               number: 80
