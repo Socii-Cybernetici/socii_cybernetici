@@ -1,23 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: catholic-codes-website
+  name: cybernetici
   namespace: catholic-codes
   labels:
-    app: catholic-codes-website
+    app: cybernetici
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: catholic-codes-website
+      app: cybernetici
   template:
     metadata:
       labels:
-        app: catholic-codes-website
+        app: cybernetici
+        version: v1.0.0
     spec:
+      imagePullSecrets:
+      - name: registry-secret
       containers:
       - name: nextjs-app
-        image: your-registry/catholic-codes-nextjs:latest  # Update with your image
+        image: registry.unionstack.dev/cybernetici:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 3000
         env:
@@ -25,20 +29,22 @@ spec:
           value: "production"
         resources:
           requests:
-            memory: "256Mi"
-            cpu: "100m"
+            memory: "128Mi"
+            cpu: "50m"
           limits:
             memory: "512Mi"
-            cpu: "500m"
+            cpu: "200m"
         livenessProbe:
           httpGet:
             path: /
             port: 3000
           initialDelaySeconds: 30
           periodSeconds: 10
+          timeoutSeconds: 5
         readinessProbe:
           httpGet:
             path: /
             port: 3000
-          initialDelaySeconds: 5
+          initialDelaySeconds: 10
           periodSeconds: 5
+          timeoutSeconds: 3
